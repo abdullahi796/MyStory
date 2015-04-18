@@ -1,116 +1,100 @@
 (function() {
-  var app = angular.module('gemStore', []);
-
-  app.controller('StoreController', function(){
-    this.products = gems;
+  var app = angular.module('storyApp', []);
+  
+  app.controller('StoryController',function(){
+    this.story = [
+        {
+          title: 'Together again',
+          text: 'Someday ....',
+          num: 4,
+          like: 10
+        },
+        
+        {
+          title: 'Illusion of a soul',
+          text: 'One day in.',
+          num: 2,
+          like: 2
+        },
+        {
+          title: 'Men and Women',
+          text: 'Once there was a girl.',
+          num: 3,
+          like: 5
+        }
+        
+      ]
+      
+      this.addLike= function(story){
+        story.like +=1;
+      }
+      
+        this.showForm = function(num){
+            return this.showBol === num;
+        };
+        this.setForm = function(num){
+            this.showBol = num;
+        };      
   });
-
-  app.controller('TabController', function(){
-    this.tab = 1;
-
-    this.setTab = function(tab){
-      this.tab = tab;
-    };
-
-    this.isSet = function(tab){
-      return (this.tab === tab);
-    };
+  app.controller('formController',function(){
+        this.textAdd = '';
+        this.showBol = 0;
+        
+        this.addText = function(story){
+          story.text += " " + this.textAdd;
+          this.textAdd = " "
+        };
+        
   });
-
-  app.controller('GalleryController', function(){
-    this.current = 0;
-
-    this.setCurrent = function(index){
-      this.current = index;
-    };
+  app.controller('dataController',function($scope){
+        this.inject = function(storyCtrl){
+          Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+          var StoryObj = Parse.Object.extend("StoryObj");
+          var query = new Parse.Query(StoryObj);
+          //storyCtrl.story.length = 5;
+          query.greaterThan("likes", 0);
+          query.find({
+            success: function(results) {
+              // Do something with the returned Parse.Object values
+              for (var i = 0; i < results.length; i++) { 
+                var object = results[i];
+                storyCtrl.story[i].title = object.get('title');
+                storyCtrl.story[i].text = object.get('text');
+                storyCtrl.story[i].num = object.get('num');
+                storyCtrl.story[i].like = object.get('likes');                
+                console.log(storyCtrl.story);
+                $scope.$apply()
+              }
+            },
+            error: function(error) {
+              alert("Error: " + error.code + " " + error.message);
+            }
+          });
+          };    
+          this.updateParse = function(storyCtrl){
+            alert('dsf');
+            Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+            var StoryObj = Parse.Object.extend("StoryObj");
+            var query = new Parse.Query(StoryObj);
+            //storyCtrl.story.length = 5;
+            query.greaterThan("likes", 0);
+            query.find({
+              success: function(results) {
+                // Do something with the returned Parse.Object values
+                for (var i = 0; i < results.length; i++) { 
+                  var object = results[i];
+                  object.set('title',storyCtrl.story[i].title);
+                  object.set('text',storyCtrl.story[i].text);
+                  object.set('num',storyCtrl.story[i].num);                 
+                  object.set('likes',storyCtrl.story[i].like);   
+                  object.save();
+                  $scope.$apply()
+                }
+              },
+              error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+              }
+            });
+          };
   });
-
-  app.controller('ReviewController', function() {
-    this.review = {};
-
-    this.addReview = function(product) {
-      product.reviews.push(this.review);
-
-      this.review = {};
-    };
-  });
-
-  var gems = [{
-      name: 'Azurite',
-      description: "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
-      shine: 8,
-      price: 110.50,
-      rarity: 7,
-      color: '#CCC',
-      faces: 14,
-      images: [
-        "images/gem-02.gif",
-        "images/gem-05.gif",
-        "images/gem-09.gif"
-      ],
-      reviews: [{
-        stars: 5,
-        body: "I love this gem!",
-        author: "joe@example.org",
-        createdOn: 1397490980837
-      }, {
-        stars: 1,
-        body: "This gem sucks.",
-        author: "tim@example.org",
-        createdOn: 1397490980837
-      }]
-    }, {
-      name: 'Bloodstone',
-      description: "Origin of the Bloodstone is unknown, hence its low value. It has a very high shine and 12 sides, however.",
-      shine: 9,
-      price: 22.90,
-      rarity: 6,
-      color: '#EEE',
-      faces: 12,
-      images: [
-        "images/gem-01.gif",
-        "images/gem-03.gif",
-        "images/gem-04.gif",
-      ],
-      reviews: [{
-        stars: 3,
-        body: "I think this gem was just OK, could honestly use more shine, IMO.",
-        author: "JimmyDean@example.org",
-        createdOn: 1397490980837
-      }, {
-        stars: 4,
-        body: "Any gem with 12 faces is for me!",
-        author: "gemsRock@example.org",
-        createdOn: 1397490980837
-      }]
-    }, {
-      name: 'Zircon',
-      description: "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
-      shine: 70,
-      price: 1100,
-      rarity: 2,
-      color: '#000',
-      faces: 6,
-      images: [
-        "images/gem-06.gif",
-        "images/gem-07.gif",
-        "images/gem-08.gif"
-      ],
-      reviews: [{
-        stars: 1,
-        body: "This gem is WAY too expensive for its rarity value.",
-        author: "turtleguyy@example.org",
-        createdOn: 1397490980837
-      }, {
-        stars: 1,
-        body: "BBW: High Shine != High Quality.",
-        author: "LouisW407@example.org",
-        createdOn: 1397490980837
-      }, {
-        stars: 1,
-        body: "Don't waste your rubles!",
-        author: "nat@example.org",
-        createdOn: 1397490980837
-      }]
-    }];
 })();

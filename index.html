@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="gemStore">
+<html ng-app='storyApp'>
   <head>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     
@@ -9,90 +13,32 @@
     
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" href="main.css" type="text/css" />
+    <script type="text/javascript" src="app.js"></script>
   </head>
-     <body ng-controller="StoreController as store">
-        <header>
-          <h1 class="text-center">Flatlander Crafted Gems</h1>
-          <h2 class="text-center">– an Angular store –</h2>
-        </header>
-        <div class="list-group">
-          <div class="list-group-item" ng-repeat="product in store.products">
-            <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
-            <section ng-controller="TabController as tab">
-              <ul class="nav nav-pills">
-                <li ng-class="{ active:tab.isSet(1) }">
-                  <a href="" ng-click="tab.setTab(1)">Description</a>
-                </li>
-                <li ng-class="{ active:tab.isSet(2) }">
-                  <a href="" ng-click="tab.setTab(2)">Specs</a>
-                </li>
-                <li ng-class="{ active:tab.isSet(3) }">
-                  <a href="" ng-click="tab.setTab(3)">Reviews</a>
-                </li>
-              </ul>
-              <div ng-show="tab.isSet(1)">
-                <h4>Description</h4>
-                <blockquote>{{product.description}}</blockquote>
+    <body>
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">Profile</a></li>
+          <li role="presentation"><a href="#">Messages</a></li>
+        </ul>
+        <div id='wrapper' ng-controller='StoryController as storyCtrl'>
+            <button type="button" class="btn btn-primary btn-lg" ng-controller="dataController as dataCtrl" ng-click='dataCtrl.inject(storyCtrl)' >Update</button>
+            <button type="button" class="btn btn-primary btn-lg" ng-click='dataCtrl.updateParse(storyCtrl)'>Save</button>
+            <div id='story' ng-repeat="story in storyCtrl.story | orderBy:'-like'">
+                <div id='text' ng-click='storyCtrl.setForm(story.num)'>
+                <h3>{{story.title}}</h3>
+                <span class="glyphicon glyphicon-heart" id='like' aria-hidden="true" ng-click='storyCtrl.addLike(story)'></span>
+                <span id='likes'>{{story.like}}</span>
+                <p class="lead" >{{story.text}} </p>
               </div>
-              <div ng-show="tab.isSet(2)">
-                <h4>Specs</h4>
-                <blockquote>Shine: {{product.shine}}</blockquote>
-              </div>
-              <div ng-show="tab.isSet(3)">
-                <!--  Product Reviews List -->
-                <ul>
-                  <h4>Reviews</h4>
-                  <li ng-repeat="review in product.reviews">
-                    <blockquote>
-                      <strong>{{review.stars}} Stars</strong>
-                      {{review.body}}
-                      <cite class="clearfix">—{{review.author}}</cite>
-                    </blockquote>
-                  </li>
-                </ul>
-    
-                <!--  Review Form -->
-                <form name="reviewForm">
-    
-                  <!--  Live Preview -->
-                  <blockquote>
-                    <strong>{{review.stars}} Stars</strong>
-                    {{review.body}}
-                    <cite class="clearfix">—{{review.author}}</cite>
-                  </blockquote>
-    
-                  <!--  Review Form -->
-                  <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
-                  
-                    <!--  Live Preview -->
-                      <strong>{{reviewCtrl.review.stars}} Stars</strong>
-                      {{reviewCtrl.review.body}}
-                      <cite class="clearfix">—{{reviewCtrl.review.author}}</cite>
-                  
-                  <!--  Review Form -->
-                  <h4>Submit a Review</h4>
-                  <fieldset class="form-group">
-                    <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars">
-                      <option value="">Rate the Product</option>
-                    </select>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-                  </fieldset>
+                <form name='storyForm' ng-controller='formController as formCtrl' ng-submit='formCtrl.addText(story)' ng-show='storyCtrl.showForm(story.num)'>
+                  <div id='formWrapper'>
+                  <textarea class="form-control" rows="3" ng-model='formCtrl.textAdd'></textarea>
+                  <input type='submit' value='Submit'/>
+                  </div>
                 </form>
-              </div>
-            </section>
-          </div>
+            </div>
         </div>
-      </body>
+    </body>
 </html>
