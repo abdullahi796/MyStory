@@ -23,8 +23,18 @@
           <li role="presentation"><a href="#">Messages</a></li>
         </ul>
         <div id='wrapper' ng-controller='StoryController as storyCtrl'>
-            <button type="button" class="btn btn-primary btn-lg" ng-controller="dataController as dataCtrl" ng-click='dataCtrl.inject(storyCtrl)' >Update</button>
-            <button type="button" class="btn btn-primary btn-lg" ng-click='dataCtrl.updateParse(storyCtrl)'>Save</button>
+          <div ng-controller="dataController as dataCtrl">
+            <button type="button" class="btn btn-primary btn-lg" ng-click='dataCtrl.inject(storyCtrl,"show")' >Update</button>
+            <button type="button" class="btn btn-primary btn-lg" ng-click='dataCtrl.inject(storyCtrl,"update")'>Save</button>
+            <button type="button" class="btn btn-primary btn-lg" ng-click='dataCtrl.showCreate()'>Create</button>
+            <form ng-submit='dataCtrl.inject(storyCtrl,create)' ng-show='dataCtrl.showBol'>
+              <div id='formWrapper'>
+                <textarea class="form-control" rows="3" ng-model='dataCtrl.titleAdd'></textarea>
+                <textarea class="form-control" rows="3" ng-model='dataCtrl.textAdd'></textarea>
+                <input type='submit' value='Submit'/>
+              </div>
+            </form>
+          </div>
             <div id='story' ng-repeat="story in storyCtrl.story | orderBy:'-like'">
                 <div id='text' ng-click='storyCtrl.setForm(story.num)'>
                 <h3>{{story.title}}</h3>
