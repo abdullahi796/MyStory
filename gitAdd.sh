@@ -4,7 +4,7 @@ git add .
 
 echo "Enter Message"
 read NAME
-git commit -m name
+git commit -m "$NAME"
 echo "Commiting"
 
 git push -u origin master
