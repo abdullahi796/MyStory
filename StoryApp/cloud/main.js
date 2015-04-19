@@ -1,7 +1,5 @@
-
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
-Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
 Parse.Cloud.define("hello", function(request, response) {
     Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
     var StoryObj = Parse.Object.extend("StoryObj");
