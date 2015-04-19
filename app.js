@@ -90,6 +90,7 @@
                 $scope.$apply()
               }
               }
+              
               else if(action==='update'){
                   alert('dsf');
                   Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
