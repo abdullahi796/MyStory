@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "MyStory": {
+            "applicationId": "j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", 
+            "masterKey": "7T0kIcIuEo24lqxpYzVp5rv3i9xqeOKvcYuM0QTc"
+        }, 
+        "_default": {
+            "link": "MyStory"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.4.2"
+    }
+}
