@@ -8,7 +8,7 @@ while [ "$input" != "exit" ]; do
         mkdir "$dirName"
     fi
     if [ "$input" = "file" ]; then
-        echo "Enter file dir names"
+        echo "Enter file names"
         read fileName
         echo "$null" >> "$dirName/$fileName"
     fi
