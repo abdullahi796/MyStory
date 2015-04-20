@@ -59,7 +59,7 @@
       }
     };
         this.inject = function(storyCtrl,action){
-          Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+          Parse.initialize("j44HMde83dIGkvxlBPy78YD3wWwnuikdrDaO19VV", "ac1ol1aNi7bxuo0plV5ai2k4SxhViiukDTFEQZ9M");
           var StoryObj = Parse.Object.extend("StoryObj");
           var query = new Parse.Query(StoryObj);
           //storyCtrl.story.length = 5;
@@ -92,8 +92,8 @@
               }
               
               else if(action==='update'){
-                  alert('dsf');
-                  Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+                  alert('Saved data to backend!');
+                  Parse.initialize("j44HMde83dIGkvxlBPy78YD3wWwnuikdrDaO19VV", "ac1ol1aNi7bxuo0plV5ai2k4SxhViiukDTFEQZ9M");
                   var StoryObj = Parse.Object.extend("StoryObj");
                   var query = new Parse.Query(StoryObj);
                   //storyCtrl.story.length = 5;
@@ -117,7 +117,7 @@
                   });
               }
               else if(action==='create'){
-                  Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+                  Parse.initialize("j44HMde83dIGkvxlBPy78YD3wWwnuikdrDaO19VV", "ac1ol1aNi7bxuo0plV5ai2k4SxhViiukDTFEQZ9M");
                   var StoryObj = Parse.Object.extend("StoryObj");
                   var storyObj = new StoryObj();
                    

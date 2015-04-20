@@ -4,7 +4,7 @@
     this.username = "";
     this.password = "";
     this.signIn = function(){
-        Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
+        Parse.initialize("j44HMde83dIGkvxlBPy78YD3wWwnuikdrDaO19VV", "ac1ol1aNi7bxuo0plV5ai2k4SxhViiukDTFEQZ9M");
         Parse.User.logIn(this.username, this.password, {
           success: function(user) {
             alert("wooow");

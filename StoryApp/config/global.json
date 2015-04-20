@@ -1,14 +1,11 @@
 {
     "applications": {
-        "MyStory": {
-            "applicationId": "j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", 
-            "masterKey": "7T0kIcIuEo24lqxpYzVp5rv3i9xqeOKvcYuM0QTc"
+        "Proto": {
+            "applicationId": "j44HMde83dIGkvxlBPy78YD3wWwnuikdrDaO19VV", 
+            "masterKey": "laAGsvccB7Xhj50TJgsFv3MS4SrWidTPKUpMa8jJ"
         }, 
         "_default": {
-            "link": "MyStory"
+            "link": "Proto"
         }
-    }, 
-    "global": {
-        "parseVersion": "1.4.2"
     }
 }
