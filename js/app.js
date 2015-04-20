@@ -23,11 +23,11 @@
           like: 5
         }
         
-      ]
+      ];
       
       this.addLike= function(story){
         story.like +=1;
-      }
+      };
       
         this.showForm = function(num){
             return this.showBol === num;
@@ -42,7 +42,7 @@
         
         this.addText = function(story){
           story.text += " " + this.textAdd;
-          this.textAdd = " "
+          this.textAdd = " ";
         };
         
   });
@@ -57,7 +57,7 @@
       else{
         this.showBol = false;
       }
-    }
+    };
         this.inject = function(storyCtrl,action){
           Parse.initialize("j6hmZIae3pafDLIjDGpCntLonB075YYEr7s7dht0", "icc9F3VUzoYqwyZjp8FArXzMQZnO6IiCfDxhD1Iy");
           var StoryObj = Parse.Object.extend("StoryObj");
@@ -87,7 +87,7 @@
                 */
                 storyCtrl.story.push(parseObj);
                 console.log(storyCtrl.story);
-                $scope.$apply()
+                $scope.$apply();
               }
               }
               
@@ -108,7 +108,7 @@
                         object.set('num',storyCtrl.story[i].num);                 
                         object.set('likes',storyCtrl.story[i].like);   
                         object.save();
-                        $scope.$apply()
+                        $scope.$apply();
                       }
                     },
                     error: function(error) {
@@ -126,7 +126,7 @@
                   storyObj.set("num", 0);
                   storyObj.set("likes", 0);
                   this.showBol = false;
-                  $scope.$apply()
+                  $scope.$apply();
                   gameScore.save(null, {
                     success: function(gameScore) {
                       // Execute any logic that should take place after the object is saved.
