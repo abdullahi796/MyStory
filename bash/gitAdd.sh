@@ -6,6 +6,11 @@ git add .
 
 echo "Enter Message"
 read NAME
+echo "  "
+echo "  "
+echo "Doing stuff"
+echo "  "
+echo "  "
 git commit -m "$NAME"
 echo "  "
 echo "  "
